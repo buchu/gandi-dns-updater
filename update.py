@@ -84,18 +84,18 @@ def main(api_key, domain, subdomain):
                     f"Current DNS IP for {subdomain}.{domain} is {current_dns_ip}"
                 )
 
-                # Compare the public IP with the DNS IP before making the API call
-                if public_ip != current_dns_ip:
-                    logging.info(
-                        f"Public IP {public_ip} is different from DNS IP "
-                        f"{current_dns_ip}. Updating DNS record..."
-                    )
-                    update_gandi_dns_record(domain, subdomain, public_ip, api_key)
-                else:
-                    logging.info(
-                        f"Public IP {public_ip} matches the DNS IP {current_dns_ip}. "
-                        f"No update needed."
-                    )
+            # Compare the public IP with the DNS IP before making the API call
+            if public_ip != current_dns_ip:
+                logging.info(
+                    f"Public IP {public_ip} is different from DNS IP "
+                    f"{current_dns_ip}. Updating DNS record..."
+                )
+                update_gandi_dns_record(domain, subdomain, public_ip, api_key)
+            else:
+                logging.info(
+                    f"Public IP {public_ip} matches the DNS IP {current_dns_ip}. "
+                    f"No update needed."
+                )
 
         # Sleep for 1 minute before checking again
         time.sleep(60)
