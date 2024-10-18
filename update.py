@@ -67,6 +67,14 @@ def main(api_key, domain, subdomain):
     """
     Main function to monitor the public IP and update Gandi DNS if the IP has changed.
     """
+
+    public_ip = get_public_ip()
+    if public_ip is None:
+        logging.error("Could not retrieve public IP.")
+    else:
+        logging.info(f"Set current public IP: {public_ip} for {subdomain}.{domain}")
+        update_gandi_dns_record(domain, subdomain, public_ip, api_key)
+
     while True:
         # Get the current public IP
         public_ip = get_public_ip()
@@ -84,18 +92,18 @@ def main(api_key, domain, subdomain):
                     f"Current DNS IP for {subdomain}.{domain} is {current_dns_ip}"
                 )
 
-            # Compare the public IP with the DNS IP before making the API call
-            if public_ip != current_dns_ip:
-                logging.info(
-                    f"Public IP {public_ip} is different from DNS IP "
-                    f"{current_dns_ip}. Updating DNS record..."
-                )
-                update_gandi_dns_record(domain, subdomain, public_ip, api_key)
-            else:
-                logging.info(
-                    f"Public IP {public_ip} matches the DNS IP {current_dns_ip}. "
-                    f"No update needed."
-                )
+                # Compare the public IP with the DNS IP before making the API call
+                if public_ip != current_dns_ip:
+                    logging.info(
+                        f"Public IP {public_ip} is different from DNS IP "
+                        f"{current_dns_ip}. Updating DNS record..."
+                    )
+                    update_gandi_dns_record(domain, subdomain, public_ip, api_key)
+                else:
+                    logging.info(
+                        f"Public IP {public_ip} matches the DNS IP {current_dns_ip}. "
+                        f"No update needed."
+                    )
 
         # Sleep for 1 minute before checking again
         time.sleep(60)
