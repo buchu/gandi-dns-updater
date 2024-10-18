@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "dnsupdate"
+version = "0.1.0"
+description = "Update gandi DNS with public ip"
+authors = ["Romain Gaillegue <romain@biscotte.net>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.32.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

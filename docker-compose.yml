@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  gandi-dns-updater:
+    image: ghcr.io/owner/repository/gandi-dns-updater:latest
+    environment:
+      - GANDI_API_KEY=<your_gandi_api_key_here>
+      - DOMAIN=<your_domain_here>
+      - SUBDOMAIN=<your_subdomain_here>
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
