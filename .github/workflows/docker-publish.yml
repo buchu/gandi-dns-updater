@@ -33,7 +33,7 @@ jobs:
         if [ "${{ github.ref_type }}" == "branch" ]; then
           TAG=latest
         fi
-        docker build . -t ghcr.io/${{ github.repository }}/gandi-dns-updater:$TAG
+        docker build . -t ghcr.io/${{ github.repository }}:$TAG
 
     # Push the Docker image to GHCR
     - name: Push Docker image to GHCR
@@ -43,10 +43,10 @@ jobs:
         if [ "${{ github.ref_type }}" == "branch" ]; then
           TAG=latest
         fi
-        docker push ghcr.io/${{ github.repository }}/gandi-dns-updater:$TAG
+        docker push ghcr.io/${{ github.repository }}:$TAG
 
         # If a version tag, also push the image as 'latest'
         if [ "${{ github.ref_type }}" == "tag" ]; then
-          docker tag ghcr.io/${{ github.repository }}/gandi-dns-updater:$TAG ghcr.io/${{ github.repository }}/gandi-dns-updater:latest
-          docker push ghcr.io/${{ github.repository }}/gandi-dns-updater:latest
+          docker tag ghcr.io/${{ github.repository }}:$TAG ghcr.io/${{ github.repository }}:latest
+          docker push ghcr.io/${{ github.repository }}:latest
         fi
