@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "dnsupdate"
+name = "gandi-dns-updater"
 version = "0.1.0"
 description = "Gandi DNS Updater automatically updates a domain’s DNS A record via Gandi’s LiveDNS API when the public IP changes."
 authors = ["Romain Gaillegue <romain@biscotte.net>"]
